@@ -1,18 +1,20 @@
-#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from flaskr import app
-from flask import render_template
+from datetime import datetime
+from flask import render_template, request
+
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    keyword = request.values.get('keyword', '')
+    if keyword:
+        print 'You are searching for {}'.format(keyword)
+    else:
+        print 'No keyword found.'
+
+    return render_template('index.html', keyword=keyword)
 
 
-@app.route('/<name>')
-def hello_name(name):
-    return "Hello {}!".format(name)
-
-
-@app.errorhandler(404)
-def page_not_found(e):
-    # This catches all other url's and return index page.
-    return render_template('index.html')
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    return render_template('/user/login.html')

@@ -1,52 +1,67 @@
 {% extends "layout.html" %}
-{% block title %}Home{% endblock %}
+{% block title %}Index{% endblock %}
 {% block head %}
   {{ super() }}
-  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/navbar.css') }}">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/navbar-top.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/lib/font-awesome.min.css')}}">
 {% endblock %}
-{% block body %}
-
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-inverse bg-inverse navbar-toggleable-md">
-      <div class="container">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleContainer" aria-controls="navbarsExampleContainer" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand" href="#">flaskr</a>
-
-        <div class="collapse navbar-collapse" id="navbarsExampleContainer">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <input class="form-control mr-sm-2" id="keyword" type="text" placeholder="Search">
-            </li>
-          </ul>
-          <form class="form-inline my-2 my-md-0">
-            <a class="nav-link" href="#">Signin <span class="sr-only">(current)</span></a>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Join</button>
-          </form>
-        </div>
+{% block content %}
+    <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+      <a class="navbar-brand" href="#">flaskr</a>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <form class="form-inline mt-2 mt-md-0 mr-auto" action="{{url_for('index')}}">
+          <input class="form-control form-search mr-sm-2" type="text" id="keyword" placeholder="Find services" maxlength="40">
+          <span class="fa fa-search search-glass"></span>
+        </form>
+        <ul class="navbar-nav navbar-user">
+          <li class="nav-item active">
+            <a class="nav-link" data-toggle="modal" data-target="#signin_modal">Sign In</a>
+          </li>
+          <li class="nav-item nav-join">
+            <button class="btn btn-success btn-join" type="submit">Join</button>
+          </li>
+        </ul>
       </div>
     </nav>
 
     <div class="container">
       <div class="jumbotron">
-        <div class="col-sm-8 mx-auto">
-          <h1>Navbar examples</h1>
-          <p>This example is a quick exercise to illustrate how the navbar and its contents work. Some navbars extend the width of the viewport, others are confined within a <code>.container</code>. For positioning of navbars, checkout the <a href="../navbar-top/">top</a> and <a href="../navbar-top-fixed/">fixed top</a> examples.</p>
-          <p>At the smallest breakpoint, the collapse plugin is used to hide the links and show a menu button to toggle the collapsed content.</p>
-          <p>
-            <a class="btn btn-primary" href="../../components/navbar/" role="button">View navbar docs &raquo;</a>
-          </p>
+        <h1>Navbar example</h1>
+        <p class="lead">This example is a quick exercise to illustrate how the top-aligned navbar works. As you scroll, this navbar remains in its original position and moves with the rest of the page.</p>
+        <a class="btn btn-lg btn-primary" href="../../components/navbar/" role="button">View navbar docs &raquo;</a>
+        <p>You are searching for {{keyword}}</p>
+      </div>
+        {% block footer %}
+            {{ super() }}
+        {% endblock %}
+    </div>
+
+    <!-- Signin Modal -->
+    <div id="signin_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="signinModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header no-border-bottom">
+            <h5 class="modal-title" id="signinModalLabel">Login to Flaskr</h5>
+          </div>
+          <div class="modal-body">
+           <form class="form-signin">
+            <label for="inputEmail" class="sr-only">Email address</label>
+            <input type="email" id="inputEmail" class="form-control input-field" placeholder="Email / Username" required autofocus>
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" id="inputPassword" class="form-control input-field" placeholder="Password" required>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="remember-me"> Remember me
+              </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+          </form>
+          </div>
+          <div class="modal-footer">
+            <p>Not a member yet? Join now
+          </div>
         </div>
       </div>
-      <hr>
-
-      <div id="footer">
-        {% block footer %}
-          {{ super() }}
-        {% endblock %}
-      </div>
-    </div> <!-- /container -->
-
+    </div>
 {% endblock %}
-
