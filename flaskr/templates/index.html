@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block title %}Home{% endblock %}
+{% block head %}
+  {{ super() }}
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/navbar.css') }}">
+{% endblock %}
+{% block body %}
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse bg-inverse navbar-toggleable-md">
+      <div class="container">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleContainer" aria-controls="navbarsExampleContainer" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">flaskr</a>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleContainer">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <input class="form-control mr-sm-2" id="keyword" type="text" placeholder="Search">
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-md-0">
+            <a class="nav-link" href="#">Signin <span class="sr-only">(current)</span></a>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Join</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="jumbotron">
+        <div class="col-sm-8 mx-auto">
+          <h1>Navbar examples</h1>
+          <p>This example is a quick exercise to illustrate how the navbar and its contents work. Some navbars extend the width of the viewport, others are confined within a <code>.container</code>. For positioning of navbars, checkout the <a href="../navbar-top/">top</a> and <a href="../navbar-top-fixed/">fixed top</a> examples.</p>
+          <p>At the smallest breakpoint, the collapse plugin is used to hide the links and show a menu button to toggle the collapsed content.</p>
+          <p>
+            <a class="btn btn-primary" href="../../components/navbar/" role="button">View navbar docs &raquo;</a>
+          </p>
+        </div>
+      </div>
+      <hr>
+
+      <div id="footer">
+        {% block footer %}
+          {{ super() }}
+        {% endblock %}
+      </div>
+    </div> <!-- /container -->
+
+{% endblock %}
+
